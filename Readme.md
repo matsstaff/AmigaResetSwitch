@@ -176,6 +176,8 @@ The next transistor should have collector + wire (that goes to _SEL0 on MB)
 in hole 12 of the Arduino. Base + pin 6 of the NAND in hole 11 and 
 emitter + pin 7 in hole 10. Solder it up.
 
+![resetswitch](img/resetswitch.jpg)
+
 Now we are only missing a few wires.
 To pin 2+13 tack on a wire that goes to _SEL0 (CIA) and to pin 5+10 one 
 that goes to _SEL1 (CIA). Solder in a wire to 5V connection on Arduino 
@@ -201,10 +203,6 @@ Vcc(KB) <----x                    x----> GND (KB)
             +----------------------+
 
 ```
-
-And this is what it looks like all soldered up.
-
-![resetswitch](img/resetswitch.jpg)
 
 Finish the final build with heat shrink tubing around the entire thing,
 so it doesn't short anything out inside the Amiga.
