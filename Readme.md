@@ -1,6 +1,6 @@
 # Double-reset drive switch for the Amiga
 
-An Arduino Pro Mini based Amiga proper drive switcher, that switches 
+An internal Arduino Pro Mini based Amiga drive switch, that switches 
 DF0/DF1 when a double-reset is detected.
 
 ## A more in depth rationale
@@ -69,7 +69,7 @@ reset within 2 seconds, will switch the drives.
 First off, you'd need a boot selector adapter for the even CIA. You buy 
 one or build your own. There are very good guides available already on how 
 to build them, such as 
-[Boot selector guide](http://eab.abime.net/showthread.php?t=89581 "this one"), 
+[this guide](http://eab.abime.net/showthread.php?t=89581 "Boot selector guide on EAB"), 
 so I won't rehash that. Bottom line is that you need to separate 
 *pin 13 - _SEL0* and *pin 14 - _SEL1* between the CIA and the socket on 
 the mother board, so that in order to switch drives you can connect _SEL0 
@@ -84,18 +84,19 @@ The pin spacing is normal 2.54mm. You can for example use a short 8 lead
 female-female (Dupont wires) and insert pins from a pin header to do a 
 gender change on one end. Or you could try use one of those female pinheaders
 with extra long male pins (often referred to as stackable pin headers), 
-frequently used for Arduino shields (the pins are usualy pretty flimsy though).
+frequently used for Arduino shields. The pins are usually pretty flimsy and flat,
+but they are also too long, so they can be bent and folded over, to make better contact.
 
-| Pin No | Signal | Note |
-|--|--|---|
-| 1 | _KBCLOCK | |
-| 2 | _KBDATA | |
-| 3 | _KBRESET | We need this line |
-| 4 | Vcc (5v) | We need this line |
-| 5 | KEY | |
-| 6 | Ground | We need this line |
-| 7 | STATUS | |
-| 8 | INUSE | |
+| Pin No | Signal   | Note              |
+|--------|----------|-------------------|
+| 1      | _KBCLOCK |                   |
+| 2      | _KBDATA  |                   |
+| 3      | _KBRESET | We need this line |
+| 4      | Vcc (5v) | We need this line |
+| 5      | KEY      |                   |
+| 6      | Ground   | We need this line |
+| 7      | STATUS   |                   |
+| 8      | INUSE    |                   |
 
 For the actual switch-a-roo part, you'd need:
 * An Arduino Pro Mini + a USB-TTL serial adapter (only for initial code upload)
@@ -105,9 +106,6 @@ For the actual switch-a-roo part, you'd need:
 * Perhaps some heat shrink tubing or something to finish up the build
 
 ## Building
-
-Here's some thousand words showing my final result:
-
 
 Maybe start by uploading the sketch to the Pro Mini. It would be frustrating
 to build the entire thing and then find out the board is bad.
@@ -131,6 +129,8 @@ being careful not to make contact with pin 4 (or 5+10), I left some
 insulation on the wire for that. Make a another wire jumper between 
 pin 11 and 8 (watching out for pin 9 and 13+2).
 
+![74LS38N](img/74LS38N_2.jpg)
+
 Using a needle nose pliers (or similar), bend just the very tip of each 
 of the remaining legs down. That should make it possible just barely fit 
 the chip *on the back* of the Arduino Pro Mini. So flip the Pro Mini over 
@@ -138,20 +138,20 @@ and fit the chip, so that the pins line up as such:
 
 | 74LS38 | Arduino |
 |--------|---------|
-| 1 | A2 |
-| 2 | A1 |
-| 3 | A0 |
-| 4 | 13 |
-| 5 | 12 |
-| 6 | 11 |
-| 7 | 10 |
-| 8 | 9 |
-| 9 | 8 |
-| 10 | 7 |
-| 11 | 6 |
-| 12 | 5 |
-| 13 | 4 |
-| 14 | 3 |
+| 1      | A2      |
+| 2      | A1      |
+| 3      | A0      |
+| 4      | 13      |
+| 5      | 12      |
+| 6      | 11      |
+| 7      | 10      |
+| 8      | 9       |
+| 9      | 8       |
+| 10     | 7       |
+| 11     | 6       |
+| 12     | 5       |
+| 13     | 4       |
+| 14     | 3       |
 
 Once there is a good fit, you can tack the chip in place by soldering in 
 pin 1 and 8 of the NAND (in opposite corners). You can then go on and solder 
@@ -162,6 +162,9 @@ needs be fitted. Bend the collector of the first transistor, because it
 needs to 'skip over' a hole, and then fit it on the Arduino so that the 
 collector is in the hole for pin 4 *on the Arduino* (that would correspond 
 to pin 13 on the NAND, but of course that is pin is already bent over its back).
+
+![74LS38N](img/NPN.jpg)
+
 Pre-tin a piece of signal wire of appropriate length, and jam it in together 
 with the collector (actually, it might be easier to insert the wire first and 
 then push the collector in). This wire should then go to _SEL1 on the Amiga 
